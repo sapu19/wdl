@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Client Form</title>
+</head>
+<body>
+	<div class="container">
+    	<form method="post" action="#" id="Form1">
+        	<h2>Client Form</h2>
+        	<div>
+            	<label>Name:</label>
+            	<input type="text" placeholder="Enter Name" id="Name">
+        	</div>
+        	<div>
+            	<label>PhoneNo:</label>
+            	<input type="text" placeholder="Enter PhoneNo" id="Phoneno">
+        	</div>
+        	<div>
+            	<label>Email:</label>
+            	<input type="email" placeholder="Enter Email" id="Email">
+        	</div>
+        	<div>
+            	<label>Password:</label>
+            	<input type="password" placeholder="Enter Password" id="Password">
+        	</div>
+        	<button type="submit">Submit</button>
+    	</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+    	$(document).ready(function(){
+        	$("#Form1").submit(function(event){
+           	event.preventDefault();
+           	$(".error").remove();
+           	var name = $("#Name").val();
+           	if(name === "")
+           	{
+                	$("#Name").focus();
+                	$("#Name").after("<span class='error' style='color:red'>Enter Correct Name</span>");
+           	}
+           	var pno = $("#Phoneno").val();
+           	$(".noerror").remove();
+           	if(pno.length != 10)
+           	{
+                	$("#Phoneno").after("<span class='noerror' style='color:red'>Phone Number must have 10 digits only</span>");
+           	}
+           	var email = $("#Email").val();
+           	var atpos = email.toString().indexOf("@");
+   			var dotpos = email.toString().lastIndexOf(".");
+           	if (email === "") {
+   			 	$("#Email").focus();
+   			 	$("#Email").after("<span class='error' style='color:red'>Email-ID can't be empty</span>");
+   			 	return;
+   			 } else if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+   			 	$("#Email").focus();
+   			 	$("#Email").after("<span class='error' style='color:red'>Enter Valid Email-ID</span>");
+   			 	return;
+   			 }
+   			 var password = $("#Password").val()
+   			 if(password === ""){
+   				 $("#Password").focus();
+   			 	$("#Password").after("<span class='error' style='color:red'>Password can't be empty</span>");
+   			 }
+        	});
+    	});
+	</script>
+</body>
+</html>

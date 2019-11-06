@@ -1,0 +1,101 @@
+DTD file:
+<!ElEMENT STUDENTS ( TITLE?,STUDENT*)>
+<!ElEMENT TITLE ( #PCDATA)>
+<!ElEMENT STUDENT ( NAME, ROLLNO, SUB*)>
+<!ElEMENT NAME ( #PCDATA)>
+<!ElEMENT ROLLNO ( #PCDATA)>
+<!ELEMENT SUB ( SUBNAME,MARKS)>
+<!ELEMENT SUBNAME ( #PCDATA)>
+<!ELEMENT MARKS ( #PCDATA)>
+
+XML File:
+<!DOCTYPE STUDENT SYSTEM "details.dtd">
+<STUDENTS>
+<TITLE> RESULT OF TE-COMPS </TITLE>
+<STUDENT>
+	<NAME>Jai Jain</NAME>
+	<ROLLNO>1</ROLLNO>
+	<SUB>
+    	<SUBNAME>WEBTECH</SUBNAME>
+    	<MARKS>80</MARKS>
+	</SUB>
+	<SUB>
+    	<SUBNAME>DBMS</SUBNAME>
+    	<MARKS>90</MARKS>
+	</SUB>
+	<SUB>
+    	<SUBNAME>MATHS</SUBNAME>
+    	<MARKS>99</MARKS>
+	</SUB>
+</STUDENT>
+
+<STUDENT>
+	<NAME>Kinjal Keshri</NAME>
+	<ROLLNO>2</ROLLNO>
+	<SUB>
+    	<SUBNAME>WEBTECH</SUBNAME>
+    	<MARKS>89</MARKS>
+	</SUB>
+	<SUB>
+    	<SUBNAME>DBMS</SUBNAME>
+    	<MARKS>95</MARKS>
+	</SUB>
+	<SUB>
+    	<SUBNAME>MATHS</SUBNAME>
+    	<MARKS>99</MARKS>
+	</SUB>
+</STUDENT>
+
+<STUDENT>
+	<NAME>Divya Jain</NAME>
+	<ROLLNO>2</ROLLNO>
+	<SUB>
+    	<SUBNAME>WEBTECH</SUBNAME>
+    	<MARKS>80</MARKS>
+	</SUB>
+	<SUB>
+    	<SUBNAME>DBMS</SUBNAME>
+    	<MARKS>90</MARKS>
+	</SUB>
+	<SUB>
+    	<SUBNAME>MATHS</SUBNAME>
+    	<MARKS>89</MARKS>
+	</SUB>
+</STUDENT>
+
+</STUDENTS>
+
+HTML File:
+<html>
+<body>
+	<p id="demo"></p>
+	<script>
+    	xmlhttp = new XMLHttpRequest();
+    	xmlhttp.open("GET", "student.xml", false);
+    	xmlhttp.send();
+   	 
+    	if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+        	xmlDoc = xmlhttp.responseXML;
+       	 
+        	document.write(xmlDoc.getElementsByTagName("TITLE")[0].textContent);
+        	var student = xmlDoc.getElementsByTagName("STUDENT");
+       	 
+        	document.write("<table border='1'><tr><th>Name</th><th>RollNo</th><th>Sub1</th><th>Marks1</th><th>Sub2<th>Marks2</th><th>Sub3<th>Marks3</th></tr>");
+        	for (i = 0; i < student.length; i++) {
+            	document.write("<tr><td>"+student[i].getElementsByTagName("NAME")[0].textContent+"</td>");
+            	document.write("<td>"+student[i].getElementsByTagName("ROLLNO")[0].textContent+"</td>");
+            	document.write("<td>"+student[i].getElementsByTagName("SUBNAME")[0].textContent+"</td>");
+            	document.write("<td>"+student[i].getElementsByTagName("MARKS")[0].textContent+"</td>");
+            	document.write("<td>"+student[i].getElementsByTagName("SUBNAME")[1].textContent+"</td>");
+            	document.write("<td>"+student[i].getElementsByTagName("MARKS")[1].textContent+"</td>");
+            	document.write("<td>"+student[i].getElementsByTagName("SUBNAME")[2].textContent+"</td>");
+            	document.write("<td>"+student[i].getElementsByTagName("MARKS")[2].textContent+"</td>");
+            	//document.write("<td>"+student[i].getElementsByTagName("ROLLNO")[0].textContent+"</td>");
+           	 
+        	}
+   	 
+        	 
+    	}    
+	</script>
+</body>
+</html>
